@@ -1,0 +1,20 @@
+[versions]
+kotlin = "1.9.0"
+androidGradlePlugin = "8.2.1"
+
+[plugins]
+androidApplication = { id = "com.android.application", version.ref = "androidGradlePlugin" }
+androidLibrary = { id = "com.android.library", version.ref = "androidGradlePlugin" }
+kotlinJvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+kotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+
+[libraries]
+androidx-activity-compose = { module = "androidx.activity:activity-compose", version = "1.8.2" }
+androidx-appcompat = { module = "androidx.appcompat:appcompat", version = "1.6.1" }
+androidx-core-ktx = { module = "androidx.core:core-ktx", version = "1.12.0" }
+androidx-lifecycle-runtime-ktx = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version = "2.7.0" }
+kotlin-gradle-plugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
+gradle = { module = "com.android.tools.build:gradle", version.ref = "androidGradlePlugin" }
+build-gradle = { module = "com.android.tools.build:gradle", version.ref = "androidGradlePlugin" }
+junit = { module = "junit:junit", version = "4.13.2" }
+material = { module = "com.google.android.material:material", version = "1.11.0" }
