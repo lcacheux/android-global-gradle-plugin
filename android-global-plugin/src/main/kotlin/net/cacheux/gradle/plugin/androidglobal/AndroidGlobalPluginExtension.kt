@@ -22,7 +22,6 @@ abstract class AndroidGlobalCommonExtension: CommonExtension<BuildFeatures, Buil
 open class AndroidGlobalPluginExtension(private val project: Project) {
     companion object {
         const val ANDROID_GLOBAL = "androidGlobal"
-        const val ANDROID_COMMON_GLOBAL = "androidCommonGlobal"
         const val APPLICATION_GLOBAL = "applicationGlobal"
         const val LIBRARY_GLOBAL = "libraryGlobal"
         const val KOTLIN_GLOBAL = "kotlinGlobal"
@@ -30,7 +29,7 @@ open class AndroidGlobalPluginExtension(private val project: Project) {
 
     init {
         project.extensions.findByType(AndroidExtension::class.java)?.let { android ->
-            project.getParentAction()?.execute(android)
+            project.getParentAction<AndroidExtension>(ANDROID_GLOBAL)?.execute(android)
         }
 
         project.tasks.withType(KotlinCompile::class.java).configureEach { compile ->
@@ -60,14 +59,6 @@ open class AndroidGlobalPluginExtension(private val project: Project) {
 
     fun library(action: Action<LibraryExtension>) {
         project.extraProperties.set(LIBRARY_GLOBAL, action)
-    }
-
-    private fun Project.getParentAction(): Action<AndroidExtension>? {
-        return if (extraProperties.has(ANDROID_GLOBAL)) {
-            extraProperties.get(ANDROID_GLOBAL) as Action<AndroidExtension>
-        } else {
-            parent?.getParentAction()
-        }
     }
 
     private fun <T> Project.getParentAction(label: String): Action<T>? {
